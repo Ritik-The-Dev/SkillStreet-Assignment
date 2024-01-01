@@ -1,0 +1,257 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Notes API",
+      "version": "1.0.0",
+      "description": "API for managing notes"
+    },
+    "components": {
+        "securitySchemes": {
+          "basicAuth": {
+            "type": "http",
+            "scheme": "basic"
+          }
+        }
+      },
+      "security": [
+        {
+          "basicAuth": []
+        }
+      ],
+    "paths": {
+      "/api/v1/addNote": {
+        "post": {
+          "summary": "Add a new note",
+          "description": "Endpoint for adding a new note.",
+          "security": [
+            {
+              "basicAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["title", "content"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Note created successfully",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "success": "true",
+                    "data": {},
+                    "message": "Note Created Successfully"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Validation error or other error",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Validation error message"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/deleteNote": {
+        "delete": {
+          "summary": "Delete a note",
+          "description": "Endpoint for deleting a note.",
+          "security": [
+            {
+              "basicAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["_id"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Note deleted successfully",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "success": "true",
+                    "message": "Data Removed Successfully"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Validation error or other error",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Validation error message"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+        "/api/v1/editNote": {
+          "put": {
+            "summary": "Edit a note",
+            "description": "Endpoint for editing an existing note.",
+            "security": [
+                {
+                  "basicAuth": []
+                }
+              ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["_id", "title", "content"]
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Note updated successfully",
+                "content": {
+                  "application/json": {
+                    "example": {
+                      "success": "true",
+                      "data": {},
+                      "message": "Data Updated Successfully"
+                    }
+                  }
+                }
+              },
+              "409": {
+                "description": "Validation error or other error",
+                "content": {
+                  "application/json": {
+                    "example": {
+                      "message": "Validation error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/api/v1/getNote": {
+            "get": {
+              "summary": "Get a specific note",
+              "description": "Endpoint for fetching details of a specific note.",
+              "parameters": [
+                {
+                  "name": "_id",
+                  "in": "query",
+                  "description": "ID of the note to fetch",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Note fetched successfully",
+                  "content": {
+                    "application/json": {
+                      "example": {
+                        "success": true,
+                        "data": {},
+                        "message": "Data Fetched Successfully"
+                      }
+                    }
+                  }
+                },
+                "409": {
+                  "description": "Validation error or other error",
+                  "content": {
+                    "application/json": {
+                      "example": {
+                        "message": "Validation error message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          ,
+        "/api/v1/getAllNote": {
+          "get": {
+            "summary": "Get all notes",
+            "description": "Endpoint for fetching all notes.",
+            "responses": {
+              "200": {
+                "description": "All notes fetched successfully",
+                "content": {
+                  "application/json": {
+                    "example": {
+                      "success": "true",
+                      "data": [],
+                      "message": "Data Fetched Successfully"
+                    }
+                  }
+                }
+              },
+              "409": {
+                "description": "Validation error or other error",
+                "content": {
+                  "application/json": {
+                    "example": {
+                      "message": "Validation error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    }
+  }
+  
