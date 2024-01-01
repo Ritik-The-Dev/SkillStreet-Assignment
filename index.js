@@ -24,5 +24,5 @@ app.listen(PORT, "0.0.0.0", () => {
 });
 
 app.get("/", (req, res) => {
-  res.send("This is a School API");
+  res.send("This is a SkillStreet Api Assignment");
 });
